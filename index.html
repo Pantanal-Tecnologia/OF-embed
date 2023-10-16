@@ -5,32 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TESTE</title>
   <link rel="stylesheet" href="index.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pantanal-Tecnologia/OF-embed@main/dist/of-validation.css"> -->
 </head>
 <body>
   <div>TESTE</div>
-  <button id="validaABRANGE">VALIDAR</button>
-  <script src="index.js"></script>
+  <button id="validaABRANGE" disabled>VALIDAR</button>
+  <script src="dist/of-validation-min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/gh/Pantanal-Tecnologia/OF-embed@main/dist/of-validation-min.js"></script> -->
   <script>
-    // let devMode = false
-    SISTEMA = "<SISTEMA>"
-    LAYOUT = "<LAYOUT>"
-    TOKEN = "<TOKEN>"
-    TRANSACOES = ["ARRAY_TRANSACOES"] // [1,2,3,4,77,7]
+    document.addEventListener("DOMContentLoaded", function() {
+        // let devMode = false
+      SISTEMA = "<SISTEMA>" 
+      LAYOUT = "<LAYOUT>"
+      TOKEN = "<TOKEN>"
+      TRANSACOES = ["ARRAY_TRANSACOES"] // [1,2,3,4,77,7]
 
 
-    const validaABRANGE = () => {
-      const callback = () =>  {
-        // Fazer chamadas de execução
-        alert('Orçamento Executado')
+      const validaABRANGE = () => {
+        const callback = () =>  {
+          // Fazer chamadas de execução
+          alert('Orçamento Executado')
+        }
+        const embed = new OfEmbed()
+        // embed.setDevMode(devMode)
+        embed.setToken(TOKEN)
+        embed.setSistema(SISTEMA)
+        embed.validacaoFornecedor(LAYOUT, TRANSACOES, callback)
       }
-      const embed = new OfEmbed()
-      // embed.setDevMode(devMode)
-      embed.setToken(TOKEN)
-      embed.setSistema(SISTEMA)
-      embed.validacaoFornecedor(LAYOUT, TRANSACOES, callback)
-    }
 
-    document.getElementById('validaABRANGE').onclick = validaABRANGE
+      const button = document.getElementById('validaABRANGE')
+      button.onclick = validaABRANGE
+      button.disabled = false
+    });
+    
 
   </script>
 </body>
