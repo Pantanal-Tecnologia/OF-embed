@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TESTE</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div>TESTE</div>
+  <button id="validaABRANGE">VALIDAR</button>
+  <script src="index.js"></script>
+  <script>
+    // let devMode = false
+    SISTEMA = "<SISTEMA>"
+    LAYOUT = "<LAYOUT>"
+    TOKEN = "<TOKEN>"
+    TRANSACOES = ["ARRAY_TRANSACOES"] // [1,2,3,4,77,7]
+
+
+    const validaABRANGE = () => {
+      const callback = () =>  {
+        // Fazer chamadas de execução
+        alert('Orçamento Executado')
+      }
+      const embed = new OfEmbed()
+      // embed.setDevMode(devMode)
+      embed.setToken(TOKEN)
+      embed.setSistema(SISTEMA)
+      embed.validacaoFornecedor(LAYOUT, TRANSACOES, callback)
+    }
+
+    document.getElementById('validaABRANGE').onclick = validaABRANGE
+
+  </script>
+</body>
+</html>
