@@ -108,6 +108,7 @@ class OfEmbed {
           const data = await res.json()
           const result = {}
           data?.transacoes?.forEach(element => {
+            if (!result[element.produtoId]) result[element.produtoId]= {}
             result[element.produtoId][element.id] = element.nfId || false
           })
           resolve(result)
