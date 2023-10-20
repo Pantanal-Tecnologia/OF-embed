@@ -1,4 +1,5 @@
 class OfEmbed {
+  callback = () => {}
   devMode = false
   token = null
   sistema = null
@@ -61,9 +62,13 @@ class OfEmbed {
       document.body.removeChild(modal);
       modal = undefined
     }, 1000);
-
+    try {
+      this.callback()
+    } catch (error) {
+    }
   }
   validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd) {
+    this.callback = callback
     const transacoesJoined = transacoes.join(',')
     const docAddJson = JSON.stringify(DocAdd)
     const modal = this.addModal(`/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(docAddJson)}`)
