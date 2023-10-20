@@ -106,7 +106,10 @@ class OfEmbed {
       fetch(this.endPointBack + '/loadRelatorioTransacoesDataAPI' , init)
         .then(async function (res) {
           const data = await res.json()
-          const result = data?.transacoes?.map(el => el.nfId) || []
+          const result = {}
+          data?.transacoes?.forEach(element => {
+            result[element.id] = element.nfId || false
+          })
           resolve(result)
         }).catch( e => reject(e))
     })
