@@ -42,6 +42,11 @@
           const code = document.createElement('code')
           code.innerText = JSON.stringify(result)
           document.body.append(code)
+          for (const key in result) {
+            if (Object.hasOwnProperty.call(result, key)) {
+              const transacoes = result[key].filter(el = el === false);
+            }
+          }
         })
       }
 

@@ -63,9 +63,10 @@ class OfEmbed {
     }, 1000);
 
   }
-  validacaoFornecedor(layout, transacoes, callback = el => true) {
+  validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd) {
     const transacoesJoined = transacoes.join(',')
-    const modal = this.addModal(`/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(window.origin)}`)
+    const docAddJson = JSON.stringify(DocAdd)
+    const modal = this.addModal(`/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(docAddJson)}`)
     window.addEventListener("message", (event) => {
       console.log('message FROM', event.origin, this.endPointFront, this.endPointFront == event.origin)
       // Verificar a origem da mensagem por razões de segurança
