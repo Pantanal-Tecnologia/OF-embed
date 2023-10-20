@@ -83,4 +83,32 @@ class OfEmbed {
       }
   }, false);
   }
+
+  getTransacoesDocStatus(transacoes, callback = el => true) {
+    return new Promise((resolve, reject) => {
+      const header = new Headers();
+      header.append('Content-Type', 'application/json;charset=UTF-8')
+      header.append('Access-Control-Allow-Origin', '*')
+      header.append('x-access-token', this.token)
+      let data = {
+        sistema: this.sistema,
+        transacoes: transacoes
+      }
+      const init = {
+        body: JSON.stringify(data),
+        method: "POST",
+        headers: header,
+        mode: "cors",
+        cache: "default",
+      };
+      
+
+      fetch(this.endPointBack + '/loadRelatorioTransacoesDataAPI' , init)
+        .then(async function (res) {
+          const data = await res.json()
+          const result = data?.transacoes?.map(el => el.nfId) || []
+          resolve(result)
+        }).catch( e => reject(e))
+    })
+  }
 }
