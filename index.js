@@ -89,7 +89,6 @@ class OfEmbed {
       }
   }, false);
   }
-
   getTransacoesDocStatus(transacoes, callback = el => true) {
     return new Promise((resolve, reject) => {
       const header = new Headers();
@@ -97,6 +96,7 @@ class OfEmbed {
       header.append('Access-Control-Allow-Origin', '*')
       header.append('x-access-token', this.token)
       let data = {
+        layout: this.layout,
         sistema: this.sistema,
         transacoes: transacoes
       }
@@ -115,7 +115,7 @@ class OfEmbed {
           const result = {}
           data?.transacoes?.forEach(element => {
             if (!result[element.produtoId]) result[element.produtoId]= {}
-            result[element.produtoId][element.id] = element.nfId || false
+            result[element.produtoId][element.id] = element.nfId ? element.docs : false
           })
           resolve(result)
         }).catch( e => reject(e))
