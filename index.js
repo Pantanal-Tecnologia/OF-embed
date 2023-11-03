@@ -89,15 +89,15 @@ class OfEmbed {
       }
   }, false);
   }
-  // getTransacoesDocStatus(layout,transacoes, callback = el => true) {
-    getTransacoesDocStatus(transacoes, callback = el => true) {
+  getTransacoesDocStatus(layout,transacoes, callback = el => true) {
+    // getTransacoesDocStatus(transacoes, callback = el => true) {
     return new Promise((resolve, reject) => {
       const header = new Headers();
       header.append('Content-Type', 'application/json;charset=UTF-8')
       header.append('Access-Control-Allow-Origin', '*')
       header.append('x-access-token', this.token)
       let data = {
-        // layout: layout,
+        layout: layout,
         sistema: this.sistema,
         transacoes: transacoes
       }

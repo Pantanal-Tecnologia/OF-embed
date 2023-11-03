@@ -38,8 +38,8 @@
           // Fazer chamadas de execução
           alert('Orçamento Executado')
         }
-        // embed.getTransacoesDocStatus(LAYOUT,TRANSACOES).then(async(result) => {
-        embed.getTransacoesDocStatus(TRANSACOES).then(async(result) => {
+        embed.getTransacoesDocStatus(LAYOUT,TRANSACOES).then(async(result) => {
+        // embed.getTransacoesDocStatus(TRANSACOES).then(async(result) => {
           const code = document.createElement('code')
           code.innerText = JSON.stringify(result)
           document.body.append(code)
