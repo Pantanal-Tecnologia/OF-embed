@@ -18,10 +18,10 @@
         // let devMode = false
       SISTEMA = "GTM" 
       LAYOUT = "C"
-      TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOjUzNzQsImxhYmVsIjoiTUFSQ09TIEJBUkJPU0EgSk9BUVVJTSIsInRlbGVmb25lIjoiIiwibm9tZSI6Ik1BUkNPUyBCQVJCT1NBIEpPQVFVSU0iLCJlbWFpbCI6Im1hcmNvcy5qb2FxdWltQGp1bWFzYS5jb20uYnIiLCJpZCI6NTM3NCwiZm9ybmVjZWRvciI6MjgxNCwidGlwbyI6IkZPUk5FQ0VET1IiLCJBUEkiOnRydWUsImlhdCI6MTY5ODg0MjkzOCwiZXhwIjoxNjk4ODg2MTM4fQ._Qt9lBPSRIIfKQ-rDzEv6Gswfj3cNx0eoqXTk2XgMjM"
-      TRANSACOES = ["21010566"] // [1,2,3,4,77,7]
+      TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOjczNjgsImxhYmVsIjoiREVZU0UgTE9SUkFZTkUgUEVEUk8gVklPVFRPIiwidGVsZWZvbmUiOiIiLCJub21lIjoiREVZU0UgTE9SUkFZTkUgUEVEUk8gVklPVFRPIiwiZW1haWwiOiJjb252ZW5pb3NAdHJhY3RvcnRlcnJhLmNvbSIsImlkIjo3MzY4LCJmb3JuZWNlZG9yIjo0MDM1LCJ0aXBvIjoiRk9STkVDRURPUiIsIkFQSSI6dHJ1ZSwiaWF0IjoxNjk5MDQyMDczLCJleHAiOjE2OTkwODUyNzN9.0nD45mv-algUr5B9xOMoGA3OoIk5Mj30Mkga4V4jKnw"
+      TRANSACOES = ['20246804', '20246805', '20246806', '20246807', '20246808', '20246809', '20246810'] // [1,2,3,4,77,7]
       const embed = new OfEmbed()
-        embed.setDevMode(true)
+        // embed.setDevMode(true)
         embed.setToken(TOKEN)
         embed.setSistema(SISTEMA)
 
@@ -38,7 +38,8 @@
           // Fazer chamadas de execução
           alert('Orçamento Executado')
         }
-        embed.getTransacoesDocStatus(LAYOUT,TRANSACOES).then(async(result) => {
+        // embed.getTransacoesDocStatus(LAYOUT,TRANSACOES).then(async(result) => {
+        embed.getTransacoesDocStatus(TRANSACOES).then(async(result) => {
           const code = document.createElement('code')
           code.innerText = JSON.stringify(result)
           document.body.append(code)

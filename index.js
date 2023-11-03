@@ -97,7 +97,7 @@ class OfEmbed {
       header.append('Access-Control-Allow-Origin', '*')
       header.append('x-access-token', this.token)
       let data = {
-        layout: layout,
+        // layout: layout,
         sistema: this.sistema,
         transacoes: transacoes
       }
