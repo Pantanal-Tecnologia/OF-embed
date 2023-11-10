@@ -56,6 +56,12 @@ class OfEmbed {
     modalBackground.style.display = 'block';
     return modalBackground
   }
+  addWindow (src) {
+    const url = this.endPointFront + src
+    const width = window.innerWidth * 0.8
+    const height = window.innerHeight * 0.8
+    window.open(url, 'ofNfValidation', `width=${width},height=${height},location=yes`);
+  }
   closeModal (modal) {
     modal.style.display = 'none'; // Esconde o modal
     setTimeout(() => {
@@ -67,11 +73,16 @@ class OfEmbed {
     } catch (error) {
     }
   }
-  validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd) {
+  validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd, modal = true) {
     this.callback = callback
     const transacoesJoined = transacoes.join(',')
     const docAddJson = JSON.stringify(DocAdd)
-    const modal = this.addModal(`/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(docAddJson)}`)
+    const src = `/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(docAddJson)}`
+    if (modal) {
+      const modal = this.addModal(src)
+    } else {
+      this.addWindow(src)
+    }
     window.addEventListener("message", (event) => {
       console.log('message FROM', event.origin, this.endPointFront, this.endPointFront == event.origin)
       // Verificar a origem da mensagem por razões de segurança
