@@ -6,9 +6,16 @@
   <title>TESTE</title>
   <link rel="stylesheet" href="index.css">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pantanal-Tecnologia/OF-embed@main/dist/of-validation.css"> -->
+  <style>
+    #containerOF iframe {
+      height: 80Vh;
+    }
+  </style>
 </head>
 <body>
   <div>TESTE</div>
+  <div style="margin-top: 20vh; background-color: blue; min-width: 50vw;min-height: 50vh" id="containerOF">
+  </div>
   <button id="getTransacoes" disabled>getTransacoes</button>
   <button id="ValidaTransacoes" disabled>ValidaTransacoes</button>
   <script src="index.js"></script>
@@ -30,7 +37,8 @@
           // Fazer chamadas de execução
           alert('Orçamento Executado')
         }
-        embed.validacaoFornecedor(LAYOUT, TRANSACOES, callback)
+        const c = document.getElementById('containerOF')
+        embed.validacaoFornecedor(LAYOUT, TRANSACOES, callback, [], { target: c })
       }
 
       const getTransacoes = () => {

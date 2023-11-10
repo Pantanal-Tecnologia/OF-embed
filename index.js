@@ -23,44 +23,50 @@ class OfEmbed {
     }
   }
 
-  addModal(src) {
+  addModal(src, target) {
 
-    // Criar o fundo escuro do modal
-    const modalBackground = document.createElement('div');
-    modalBackground.classList.add('modal-background');
-    
-    // Criar o conteúdo do modal
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
-    
     // Criar o iframe
     const iframe = document.createElement('iframe');
     iframe.classList.add('modal-iframe');
     const url = this.endPointFront + src
     console.log(url)
     iframe.src = url
-    
-    // Adicionar o iframe ao conteúdo do modal
-    modalContent.appendChild(iframe);
 
-    // Adicionar o conteúdo do modal ao fundo escuro
-    modalBackground.appendChild(modalContent);
-
-    // Adicionar ao body
-    document.body.appendChild(modalBackground);
-
-    // Exibir o modal ao clicar no fundo escuro (isso é apenas um exemplo, pode ser controlado de outras maneiras)
-    modalBackground.addEventListener('click', () => this.closeModal(modalBackground));
-
-    // Exibir o modal (isso é apenas um exemplo, pode ser feito com base em algum evento específico)
-    modalBackground.style.display = 'block';
-    return modalBackground
+    if (!target) {
+      // Criar o fundo escuro do modal
+      const modalBackground = document.createElement('div');
+      modalBackground.classList.add('modal-background');
+      
+      // Criar o conteúdo do modal
+      const modalContent = document.createElement('div');
+      modalContent.classList.add('modal-content');
+      
+      
+      // Adicionar o iframe ao conteúdo do modal
+      modalContent.appendChild(iframe);
+  
+      // Adicionar o conteúdo do modal ao fundo escuro
+      modalBackground.appendChild(modalContent);
+  
+      // Adicionar ao body
+      document.body.appendChild(modalBackground);
+  
+      // Exibir o modal ao clicar no fundo escuro (isso é apenas um exemplo, pode ser controlado de outras maneiras)
+      modalBackground.addEventListener('click', () => this.closeModal(modalBackground));
+  
+      // Exibir o modal (isso é apenas um exemplo, pode ser feito com base em algum evento específico)
+      modalBackground.style.display = 'block';
+      return modalBackground
+    } else {
+      target?.appendChild(iframe);
+    }
   }
   addWindow (src) {
     const url = this.endPointFront + src
     const width = window.innerWidth * 0.8
     const height = window.innerHeight * 0.8
-    window.open(url, 'ofNfValidation', `width=${width},height=${height},location=yes`);
+    // window.open(url, 'ofNfValidation', `width=${width},height=${height},location=yes`);
+    window.open(url, 'ofNfValidation');
   }
   closeModal (modal) {
     modal.style.display = 'none'; // Esconde o modal
@@ -73,13 +79,27 @@ class OfEmbed {
     } catch (error) {
     }
   }
-  validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd, modal = true) {
+  validacaoFornecedor(layout, transacoes, callback = el => true, DocAdd = [], options = null) {
+    console.log(options)
+    let params = {
+      modal: true,
+      target: false
+    }
+    if (typeof options === "object") {
+      params = {
+        ...params,
+        ...options
+      }
+    }
+    console.log(params)
+
     this.callback = callback
     const transacoesJoined = transacoes.join(',')
     const docAddJson = JSON.stringify(DocAdd)
     const src = `/#/API/${this.sistema}/validacaoFornecedor/${layout}/${transacoesJoined}/${this.token}/${btoa(docAddJson)}`
-    if (modal) {
-      const modal = this.addModal(src)
+    let modal = null
+    if (params.modal) {
+      modal = this.addModal(src, params.target)
     } else {
       this.addWindow(src)
     }
@@ -92,7 +112,9 @@ class OfEmbed {
       // Processar a mensagem
       console.log("Mensagem recebida:", event.data, event.data == 'OK');
       if (event.data == 'OK') {
-        this.closeModal(modal)
+        if (modal) {
+          this.closeModal(modal)
+        }
         // REALIZAR ACOES DE EXECUCAO
         callback()
       } else {
