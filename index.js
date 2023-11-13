@@ -155,4 +155,36 @@ class OfEmbed {
         }).catch( e => reject(e))
     })
   }
+  // MODELO DE OBJ : obj = {
+  //   cliente : number,
+  //   contrato : number,
+  //   credenciador : number,
+  //   departamento : number,
+  //   fornecedor : number,
+  //   produto : number,
+  //   secretaria : number,
+  //   sistema : number,
+  // }
+  getPreData (obj) {
+    return new Promise ((resolve, reject) => {
+    if (!(obj.cliente &&
+      obj.contrato &&
+      obj.credenciador &&
+      obj.departamento &&
+      obj.fornecedor &&
+      obj.produto &&
+      obj.secretaria &&
+      obj.sistema) ) {
+        console.log(obj)
+        throw 'Dados Invalidos'
+      }
+      // const url = `/getValidationData/${obj.sistema}/${obj.credenciador}/${obj.cliente}/${obj.secretaria}/${obj.departamento}/${obj.contrato}/${obj.produto}/${obj.fornecedor}`
+      const url = `/getValidationData?sistema=${obj.sistema}&credenciador=${obj.credenciador}&cliente=${obj.cliente}&secretaria=${obj.secretaria}&departamento=${obj.departamento}&contrato=${obj.contrato}&produto=${obj.produto}&fornecedor=${obj.fornecedor}`
+      fetch(this.endPointBack + url).then(result => {
+        resolve(result.json())
+      }).catch(e => {
+        reject(e)
+      })
+    })
+  }  
 }
