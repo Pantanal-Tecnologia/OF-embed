@@ -179,7 +179,13 @@ class OfEmbed {
         throw 'Dados Invalidos'
       }
       // const url = `/getValidationData/${obj.sistema}/${obj.credenciador}/${obj.cliente}/${obj.secretaria}/${obj.departamento}/${obj.contrato}/${obj.produto}/${obj.fornecedor}`
-      const url = `/getValidationData?sistema=${obj.sistema}&credenciador=${obj.credenciador}&cliente=${obj.cliente}&secretaria=${obj.secretaria}&departamento=${obj.departamento}&contrato=${obj.contrato}&produto=${obj.produto}&fornecedor=${obj.fornecedor}`
+      let url = `/getValidationData?sistema=${obj.sistema}&credenciador=${obj.credenciador}&cliente=${obj.cliente}&secretaria=${obj.secretaria}&departamento=${obj.departamento}&contrato=${obj.contrato}&produto=${obj.produto}&fornecedor=${obj.fornecedor}`
+      if (obj.layout) {
+        url += `&layout=${obj.layout}`
+      }
+      if (obj.transacoes) {
+        url += `&transacoes=${obj.transacoes}`
+      }
       fetch(this.endPointBack + url).then(result => {
         resolve(result.json())
       }).catch(e => {
