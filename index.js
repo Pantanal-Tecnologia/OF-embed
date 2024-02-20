@@ -7,7 +7,7 @@ class OfEmbed {
   stackId = null
   user = null
   hash = null
-  endPointBack = 'https://of.pantanaltec.com.br'
+  endPointBack = 'https://of.pantanaltec.com.br/api'
   endPointFront = 'https://of.pantanaltec.com.br'
 
   setSistema = (sistema) => this.sistema = sistema
@@ -18,7 +18,7 @@ class OfEmbed {
       this.endPointBack = 'http://localhost:3000'
       this.endPointFront = 'http://localhost:8080'
     } else {
-      this.endPointBack = 'https://of.pantanaltec.com.br'
+      this.endPointBack = 'https://of.pantanaltec.com.br/api'
       this.endPointFront = 'https://of.pantanaltec.com.br'
     }
   }
@@ -149,7 +149,7 @@ class OfEmbed {
           const result = {}
           data?.transacoes?.forEach(element => {
             if (!result[element.produtoId]) result[element.produtoId]= {}
-            result[element.produtoId][element.id] = element.nfId ? element.docs : false
+            result[element.produtoId][element.id] = element.nfId ?? false
           })
           resolve(result)
         }).catch( e => reject(e))
