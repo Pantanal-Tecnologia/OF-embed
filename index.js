@@ -149,7 +149,7 @@ class OfEmbed {
           const result = {}
           data?.transacoes?.forEach(element => {
             if (!result[element.produtoId]) result[element.produtoId]= {}
-            result[element.produtoId][element.id] = element.nfId ?? false
+            result[element.produtoId][element.id] = element.nfId ? element.docs : false
           })
           resolve(result)
         }).catch( e => reject(e))
