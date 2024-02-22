@@ -7,7 +7,7 @@ class OfEmbed {
   stackId = null
   user = null
   hash = null
-  endPointBack = 'https://of.pantanaltec.com.br/api'
+  endPointBack = 'https://of.pantanaltec.com.br'
   endPointFront = 'https://of.pantanaltec.com.br'
 
   setSistema = (sistema) => this.sistema = sistema
@@ -18,7 +18,7 @@ class OfEmbed {
       this.endPointBack = 'http://localhost:3000'
       this.endPointFront = 'http://localhost:8080'
     } else {
-      this.endPointBack = 'https://of.pantanaltec.com.br/api'
+      this.endPointBack = 'https://of.pantanaltec.com.br'
       this.endPointFront = 'https://of.pantanaltec.com.br'
     }
   }
